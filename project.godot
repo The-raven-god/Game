@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="FOOD FINDER"
+run/main_scene="res://scenes/Menu.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=60
+boot_splash/image="res://scenes/SPLASH.png"
+config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Script/global.gd"
+
+[display]
+
+window/size/viewport_width=320
+window/size/viewport_height=180
+window/size/mode=2
+window/size/window_width_override=2880
+window/size/window_height_override=1920
+window/stretch/mode="viewport"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=0
+lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=0
+lights_and_shadows/positional_shadow/atlas_quadrant_2_subdiv=0
+lights_and_shadows/positional_shadow/atlas_quadrant_3_subdiv=0
