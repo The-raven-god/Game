@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://bu5mdl34fi2qf"]
+
+[ext_resource type="Theme" uid="uid://cl8lbbo5v0m28" path="res://assets/Letras.tres" id="1_1lkj2"]
+[ext_resource type="StyleBox" uid="uid://di1bd0orbm0wo" path="res://scenes/normal.tres" id="1_07b3v"]
+[ext_resource type="Script" path="res://Script/Menu.gd" id="1_rrpuu"]
+[ext_resource type="AudioStream" uid="uid://dinseoiw5ecvq" path="res://Music/walkyandtalky.ogg" id="1_wxgh1"]
+[ext_resource type="Texture2D" uid="uid://4qk7c7qathcw" path="res://scenes/Menu.jpeg" id="2_67ccn"]
+[ext_resource type="StyleBox" uid="uid://dlfnp6ru3uhm2" path="res://scenes/pressed.tres" id="2_f8glr"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1lkj2")
+script = ExtResource("1_rrpuu")
+metadata/_edit_use_anchors_ = true
+
+[node name="cover" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_67ccn")
+expand_mode = 2
+
+[node name="Contenedor" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Contenedor"]
+layout_mode = 2
+
+[node name="Butones" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.5
+offset_top = -100.0
+offset_right = 28.5
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Start" type="Button" parent="Butones"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_07b3v")
+theme_override_styles/hover = ExtResource("1_07b3v")
+theme_override_styles/pressed = ExtResource("2_f8glr")
+text = "Iniciar"
+
+[node name="Exit" type="Button" parent="Butones"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_07b3v")
+theme_override_styles/hover = ExtResource("1_07b3v")
+theme_override_styles/pressed = ExtResource("2_f8glr")
+text = "Salir"
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="MUSICA" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("1_wxgh1")
+autoplay = true
+
+[connection signal="pressed" from="Butones/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Butones/Exit" to="." method="_on_exit_pressed"]
