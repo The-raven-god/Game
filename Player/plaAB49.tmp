@@ -1,12 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://bapvy71043313"]
+[gd_scene load_steps=24 format=3 uid="uid://bapvy71043313"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_1akqa"]
 [ext_resource type="Texture2D" uid="uid://bt8gb54hjkhl1" path="res://Player/player.png" id="2_vtor2"]
 [ext_resource type="AudioStream" uid="uid://dxsoq0b1c3vx8" path="res://Music/jump.wav" id="3_0cn3p"]
 [ext_resource type="AudioStream" uid="uid://cbmc22qnee1wn" path="res://Music/Hit.wav" id="4_m1ryw"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvj6h"]
-size = Vector2(10, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abilr"]
 size = Vector2(13, 20)
@@ -19,29 +16,17 @@ region = Rect2(0, 128, 32, 32)
 atlas = ExtResource("2_vtor2")
 region = Rect2(32, 128, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_86jk1"]
-atlas = ExtResource("2_vtor2")
-region = Rect2(0, 64, 33, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5tptm"]
-atlas = ExtResource("2_vtor2")
-region = Rect2(33, 64, 33, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l6dyg"]
-atlas = ExtResource("2_vtor2")
-region = Rect2(66, 64, 33, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5jdga"]
-atlas = ExtResource("2_vtor2")
-region = Rect2(99, 64, 33, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_coi3g"]
-atlas = ExtResource("2_vtor2")
-region = Rect2(0, 64, 33, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_rasfy"]
 atlas = ExtResource("2_vtor2")
 region = Rect2(33, 160, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep5bm"]
+atlas = ExtResource("2_vtor2")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5v2w"]
+atlas = ExtResource("2_vtor2")
+region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3jw8u"]
 atlas = ExtResource("2_vtor2")
@@ -96,33 +81,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2bw1r")
 }],
-"loop": false,
-"name": &"Death",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_86jk1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5tptm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l6dyg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5jdga")
-}],
 "loop": true,
-"name": &"climb",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_coi3g")
-}],
-"loop": true,
-"name": &"climb_idle",
+"name": &"death",
 "speed": 5.0
 }, {
 "frames": [{
@@ -132,6 +92,17 @@ animations = [{
 "loop": true,
 "name": &"fall",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep5bm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5v2w")
+}],
+"loop": true,
+"name": &"going up",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -189,11 +160,6 @@ size = Vector2(13, 3)
 collision_layer = 2
 script = ExtResource("1_1akqa")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_fvj6h")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_abilr")
@@ -201,12 +167,14 @@ shape = SubResource("RectangleShape2D_abilr")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(4.76837e-07, -6)
 sprite_frames = SubResource("SpriteFrames_f4wda")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
+frame = 5
+frame_progress = 0.166666
 
 [node name="HitPoint" type="Area2D" parent="."]
-collision_layer = 3
-collision_mask = 15
+collision_layer = 0
+collision_mask = 0
 monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitPoint"]
@@ -224,7 +192,6 @@ stream = ExtResource("3_0cn3p")
 [node name="hit" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("4_m1ryw")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="HitPoint" to="." method="_on_hit_point_body_entered"]
