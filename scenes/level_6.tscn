@@ -1,17 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1hgk868kdvt2"]
+[gd_scene load_steps=9 format=3 uid="uid://c1hgk868kdvt2"]
 
 [ext_resource type="PackedScene" uid="uid://dn3p3vmyoix8o" path="res://scenes/gui.tscn" id="1_6ahkr"]
 [ext_resource type="PackedScene" uid="uid://bcsnyw4t6pnw2" path="res://World/parallax_background.tscn" id="1_dptnp"]
 [ext_resource type="TileSet" uid="uid://dgp60fa4r1vdi" path="res://World/world-tileset.tres" id="2_86x6n"]
 [ext_resource type="PackedScene" uid="uid://bapvy71043313" path="res://Player/player.tscn" id="3_qvp7s"]
 [ext_resource type="AudioStream" uid="uid://dinseoiw5ecvq" path="res://Music/walkyandtalky.ogg" id="4_wnw24"]
+[ext_resource type="PackedScene" uid="uid://b776jui5pbh0v" path="res://scenes/camera.tscn" id="5_d6rj4"]
 [ext_resource type="PackedScene" uid="uid://hvw2tjk7rxpp" path="res://Enemies/Oposum/oposum.tscn" id="5_labgv"]
+[ext_resource type="PackedScene" uid="uid://c23nldpqecir8" path="res://scenes/Casa.tscn" id="8_g1qpb"]
 
 [node name="Level6" type="Node2D"]
 
-[node name="Gui" parent="." instance=ExtResource("1_6ahkr")]
+[node name="gui" parent="." instance=ExtResource("1_6ahkr")]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_dptnp")]
+scroll_offset = Vector2(699.312, 320.792)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_86x6n")
@@ -21,11 +24,7 @@ layer_0/tile_data = PackedInt32Array(851980, 196608, 1, 851981, 196608, 1, 85198
 [node name="Player" parent="." instance=ExtResource("3_qvp7s")]
 position = Vector2(62, 180)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-limit_left = 0
-limit_top = 0
-limit_right = 3600
-limit_bottom = 240
+[node name="Camera2D" parent="Player" instance=ExtResource("5_d6rj4")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wnw24")
@@ -33,3 +32,6 @@ autoplay = true
 
 [node name="Oposum" parent="." instance=ExtResource("5_labgv")]
 position = Vector2(372, 194)
+
+[node name="Casa" parent="." instance=ExtResource("8_g1qpb")]
+position = Vector2(1550, 96)

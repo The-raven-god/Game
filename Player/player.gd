@@ -1,16 +1,20 @@
 extends CharacterBody2D
+class_name player
 
 var axis : Vector2 = Vector2.ZERO
-var death : bool=false
+var death : bool = false
 
 @export_category("config")
 @export_group("Required References")
-@export var gui : CanvasLayer
+@export var gui : CanvasLayer  # Asegúrate de que esta propiedad esté configurada en el editor
 
 @export_group("Motion")
-@export var speed :int = 110
+@export var speed : int = 110
 @export var gravity : int = 16
-@export var jump : int =368
+@export var jump : int = 368
+
+var colliding_ladder = false
+var going_up = false
 
 func _process(delta):
 	match death:
@@ -25,15 +29,29 @@ func _input(event):
 
 func get_axis() -> Vector2:
 	axis.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	return axis.normalized()
-	
+	axis.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	return axis
+
 func motion_ctrl() -> void:
-		"""Movimiento"""
+	"""Movimiento"""
+	if colliding_ladder:
+		# Movimiento en la escalera
+		velocity.x = get_axis().x * speed
+		velocity.y = get_axis().y * speed
+		if get_axis().y != 0 or get_axis().x != 0:
+			$Sprite.set_animation("climb")
+		else:
+			$Sprite.set_animation("climb_idle")
+		move_and_slide()
+	else:
 		if not get_axis().x == 0:
 			$Sprite.scale.x = get_axis().x
 		
 		velocity.x = get_axis().x * speed
-		velocity.y += gravity
+		
+		# Aplicar gravedad solo si no está en una escalera
+		if not colliding_ladder:
+			velocity.y += gravity
 		
 		move_and_slide()
 		
@@ -61,8 +79,8 @@ func jump_ctrl(power : float) -> void:
 
 func damage_ctrl() -> void:
 	death = true
-	$Sprite.set_animation("death")
-	
+	$Sprite.set_animation("Death")
+
 func _on_hit_point_body_entered(body):
 	if body is enemy and velocity.y >= 0:
 		$Audio/hit.play()
@@ -70,5 +88,25 @@ func _on_hit_point_body_entered(body):
 		jump_ctrl(0.75)
 
 func _on_sprite_animation_finished():
-	if $Sprite.animation == "death":
-		gui.game_over()
+	if $Sprite.animation == "Death":
+		if gui:
+			print("Llamando a game_over() en gui")
+			gui.game_over()
+		else:
+			print("Error: 'gui' no está asignado")
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("ladder"):
+		colliding_ladder = true
+
+func _on_area_2d_area_exited(area):
+	if area.is_in_group("ladder"):
+		colliding_ladder = false
+		going_up = false
+
+func climb():
+	if colliding_ladder:
+		if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
+			going_up = true
+		else:
+			going_up = false
