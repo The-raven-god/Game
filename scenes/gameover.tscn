@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bstvwfyloo0x0"]
+
+[ext_resource type="Theme" uid="uid://cl8lbbo5v0m28" path="res://assets/Letras.tres" id="1_jndjw"]
+[ext_resource type="FontFile" uid="uid://bj7asyfebf0mu" path="res://assets/upheaval/upheavtt.ttf" id="2_ar8ls"]
+
+[node name="Gameover" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOver" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jndjw")
+color = Color(0.461787, 0, 0.00518137, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -40.0
+offset_right = 60.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOver/CenterContainer"]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_ar8ls")
+bbcode_enabled = true
+text = "[center][wave]GAME OVER
+SCORE:
+"

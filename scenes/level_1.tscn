@@ -29,11 +29,6 @@ position = Vector2(0, -16)
 
 [node name="gui" parent="." instance=ExtResource("1_30a1g")]
 
-[node name="Player" parent="." instance=ExtResource("18_daium")]
-position = Vector2(128, 176)
-
-[node name="Camera2D2" parent="Player" instance=ExtResource("3_c01pd")]
-
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_kapxc")]
 
 [node name="Props" type="Node2D" parent="."]
@@ -155,7 +150,7 @@ position = Vector2(-1532.5, 1095.5)
 texture = ExtResource("14_ib8iy")
 
 [node name="Shrooms2" type="Sprite2D" parent="PropsFront"]
-position = Vector2(1562, 183)
+position = Vector2(1400, 9)
 texture = ExtResource("14_ib8iy")
 
 [node name="Door" type="Sprite2D" parent="PropsFront"]
@@ -193,28 +188,28 @@ position = Vector2(1056, -64)
 position = Vector2(848, 112)
 
 [node name="Cherry10" parent="Pickups" instance=ExtResource("17_618wu")]
-position = Vector2(-1740.5, 1062.5)
+position = Vector2(1248, 0)
 
 [node name="Cherry11" parent="Pickups" instance=ExtResource("17_618wu")]
-position = Vector2(-1468.5, 1062.5)
+position = Vector2(1314, -15)
 
 [node name="Cherry12" parent="Pickups" instance=ExtResource("17_618wu")]
-position = Vector2(-876.5, 753)
+position = Vector2(1021, 116)
 
 [node name="Cherry13" parent="Pickups" instance=ExtResource("17_618wu")]
-position = Vector2(-796.5, 561)
+position = Vector2(1355, 13)
 
 [node name="Cherry14" parent="Pickups" instance=ExtResource("17_618wu")]
-position = Vector2(-988.5, 561)
+position = Vector2(1400, -14)
 
 [node name="Cherry15" parent="Pickups" instance=ExtResource("17_618wu")]
-position = Vector2(-1436.5, 561)
+position = Vector2(1097, 118)
 
 [node name="Cherry16" parent="Pickups" instance=ExtResource("17_618wu")]
 position = Vector2(480, 128)
 
 [node name="Cherry17" parent="Pickups" instance=ExtResource("17_618wu")]
-position = Vector2(-276.5, 425)
+position = Vector2(1162, 55)
 
 [node name="Cherry18" parent="Pickups" instance=ExtResource("17_618wu")]
 position = Vector2(400, 176)
@@ -230,3 +225,8 @@ position = Vector2(160, -240)
 collision_layer = 7
 collision_mask = 7
 monitorable = false
+
+[node name="Player" parent="." instance=ExtResource("18_daium")]
+position = Vector2(128, 176)
+
+[node name="Camera2D2" parent="Player" instance=ExtResource("3_c01pd")]
