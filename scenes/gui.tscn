@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn3p3vmyoix8o"]
+[gd_scene load_steps=4 format=3 uid="uid://dn3p3vmyoix8o"]
 
 [ext_resource type="Script" path="res://Script/gui.gd" id="1_12r5u"]
 [ext_resource type="Theme" uid="uid://cl8lbbo5v0m28" path="res://assets/Letras.tres" id="1_kqv01"]
+[ext_resource type="AudioStream" uid="uid://vc06gb02d6rm" path="res://Music/Final.ogg" id="3_pdkss"]
 
 [node name="Gui" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_12r5u")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -13,6 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_kqv01")
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="MarginContainer"]
 layout_mode = 2
@@ -21,49 +24,29 @@ size_flags_vertical = 0
 theme = ExtResource("1_kqv01")
 text = "Score:00000"
 
-[node name="GameOver" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_kqv01")
-color = Color(1, 0.286275, 0.219608, 1)
-
-[node name="Container" type="VBoxContainer" parent="GameOver"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -30.5
-offset_right = 34.0
-offset_bottom = 30.5
+[node name="Container" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.919
+anchor_top = 0.103
+anchor_right = 0.919
+anchor_bottom = 0.103
+offset_left = -21.08
+offset_top = -15.54
+offset_right = 20.92
+offset_bottom = 15.46
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="GameOver/Container"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "ESTAS 
-MUERTO"
-horizontal_alignment = 1
-
-[node name="Buttons" type="HBoxContainer" parent="GameOver/Container"]
-layout_mode = 2
-
-[node name="Restart" type="Button" parent="GameOver/Container/Buttons"]
-layout_mode = 2
-text = "Reiniciar"
-
-[node name="Exit" type="Button" parent="GameOver/Container/Buttons"]
+[node name="Exit" type="Button" parent="Container"]
 layout_mode = 2
 text = "Salir"
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pdkss")
 
-[connection signal="pressed" from="GameOver/Container/Buttons/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="GameOver/Container/Buttons/Exit" to="." method="_on_exit_pressed"]
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="pressed" from="Container/Exit" to="." method="_on_exit_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
