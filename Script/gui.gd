@@ -1,19 +1,16 @@
 extends CanvasLayer
 
-func _process(delta):
-	$MarginContainer/Label.text = "SCORE:" + str(Global.score)
+func _process(_delta):
+	$MarginContainer/Label.text = "SCORE: " + str(Global.score)
 
-func game_over()-> void:
-	get_tree().paused = true
-	$GameOver/Container/Buttons/Restart.grab_focus()
-	
-	var tween:Tween =create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	tween.tween_property($GameOver,"modulate", Color(1,1,1,0.8),1.0)
-	
+func game_over() -> void:
+	print("Playing game over sound")
 	$GameOver/Sound.play()
-	
-func _on_restart_pressed():
-	get_tree().reload_current_scene()
+
+	var rect_node = $GameOver
+	rect_node.modulate = Color(1, 1, 1, 0.8)
 
 func _on_exit_pressed():
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+
+
